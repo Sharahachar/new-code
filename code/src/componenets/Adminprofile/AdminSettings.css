@@ -1,0 +1,205 @@
+/* Main settings box */
+.admin-settings-box {
+  width: 50%;
+  margin: 10 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.87);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+  overflow-y: auto;
+  max-height: 75vh; /* Responsive height */
+  margin-left: 10%;
+}
+
+.admin-setting-title{
+  color: white;
+}
+
+/* Content alignment */
+.admin-settings-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px; /* Space between sections */
+}
+
+.admin-settings-half-width {
+  color: black;
+  width: 100%; /* Full width of the container */
+  padding: 10px;
+  animation: slideIn 0.3s ease-in-out forwards;
+}
+.setting-change{
+  color: black;
+}
+/* Button styles */
+.admin-settings-content button {
+  margin-left: 1%;
+  width: 70%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #dce1e7;
+  color: rgb(19, 18, 18);
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.setting-title{
+  color: white;
+  margin-left: 0%;
+  text-align: center;
+}
+
+.admin-settings-content button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Edit profile section styles */
+.admin-settings-edit-profile-section {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-settings-edit-profile-section input[type="text"],
+.admin-settings-edit-profile-section input[type="file"] {
+  padding: 10px;
+  width: 80%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.admin-settings-profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.admin-settings-profile-image:hover {
+  transform: scale(1.1);
+}
+
+.admin-settings-save-button-container {
+  margin-top: 20px;
+}
+
+.admin-settings-save-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.admin-settings-save-button:hover {
+  background-color: #45a049;
+}
+
+/* Password section styles */
+.admin-settings-password-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-settings-password-section input {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.admin-settings-success-message {
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* History section styles */
+.admin-settings-history-section {
+  margin-top: 20px;
+}
+
+.admin-settings-history-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-settings-history-section li {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.admin-settings-history-section li:hover {
+  background-color: #e0e0e0;
+}
+
+.admin-settings-search-bar {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* Delete history button */
+.admin-settings-delete-history-button {
+  background-color: #ff5722;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.admin-settings-delete-history-button:hover {
+  background-color: #e64a19;
+}
+
+/* Back button */
+.admin-settings-back-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.admin-settings-back-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}

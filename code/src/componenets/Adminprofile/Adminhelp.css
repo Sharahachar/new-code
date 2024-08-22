@@ -1,0 +1,105 @@
+.admin-help-menu {
+    width: 50%;
+    margin: 0%;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.877);
+    animation: adminFadeIn 0.5s ease-in-out;
+    max-height: 80vh;
+    text-align: center;
+}
+
+.admin-help-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white;
+    margin-left: 0%;
+}
+
+.admin-help-contact {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.admin-contact-info {
+    margin-top: 10px;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    animation: adminSlideIn 0.5s ease-in-out;
+    color: #333;
+}
+
+.admin-help-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-help-list-item {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.admin-back-button {
+    margin-top: 20px;
+    width: 20%;
+    padding: 10px;
+    background: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.admin-back-button:hover {
+    background: #0c345e;
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.admin-back-button:active {
+    background: #083978;
+    transform: scale(0.95);
+}
+
+@keyframes adminFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes adminSlideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .admin-help-menu {
+        padding: 15px;
+        width: 80%;
+    }
+
+    .admin-help-list-item {
+        font-size: 14px;
+    }
+
+    .admin-back-button {
+        width: 100%;
+        text-align: center;
+    }
+}

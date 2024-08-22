@@ -1,0 +1,191 @@
+/* Base Styles */
+.admin-form-container {
+  width: 65%;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.849);
+  border-radius: 8px;
+  background-color: rgb(7, 10, 92);
+  margin-right: 900px;
+  transition: all 0.3s ease;
+}
+.reason-title{
+  color: white;
+  margin-right: 70%;
+}
+.admin-heading {
+  margin-left: 0%;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.admin-employee-details {
+  margin-bottom: 20px;
+  width: 90%;
+  padding: 10px;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  text-align: center;
+  margin-left: 2%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-employee-details p {
+  margin: 5px 0;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.admin-form-group {
+  margin-bottom: 20px;
+  margin-left: 2%;
+  transition: margin-left 0.3s ease, margin-bottom 0.3s ease;
+}
+
+textarea#reasonForLeaving {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.admin-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  transition: justify-content 0.3s ease;
+}
+
+.admin-button {
+  display: inline-block;
+  padding: 5px 5px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.admin-button-submit {
+  margin-top: 30px;
+  background-color: #4369e7;
+  flex: 1;
+}
+
+.admin-button-back {
+  margin-top: 30px;
+  background-color: transparent;
+  color: #e6e9ec;
+  border: none;
+  font-size: 25px;
+  flex: 1; 
+}
+
+.admin-button-discuss {
+  margin-top: 30px;
+  background-color: yellowgreen;
+  flex: 1; 
+}
+
+.admin-button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.admin-status-check-icon {
+  position: absolute;
+  margin-top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #dde1e6;
+  margin-right: 35%;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.admin-status-check-icon:hover {
+  color: #0056b3;
+  transform: rotate(20deg);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .admin-form-container {
+    width: 90%;
+    margin-right: 0;
+    transition: width 0.3s ease;
+  }
+
+  .admin-form-buttons {
+    flex-direction: column;
+    transition: flex-direction 0.3s ease;
+  }
+
+  .admin-button {
+    margin-bottom: 10px;
+    width: 100%;
+    transition: width 0.3s ease;
+  }
+
+  .admin-status-check-icon {
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    transition: top 0.3s ease, right 0.3s ease;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .admin-form-container {
+    width: 100%;
+    padding: 15px;
+    transition: width 0.3s ease, padding 0.3s ease;
+  }
+
+  .admin-heading {
+    font-size: 18px;
+    transition: font-size 0.3s ease;
+  }
+
+  .admin-form-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    transition: flex-direction 0.3s ease, align-items 0.3s ease;
+  }
+
+  .admin-button {
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: padding 0.3s ease, margin-bottom 0.3s ease;
+  }
+
+  .admin-status-check-icon {
+    top: 10px;
+    right: 20px;
+    font-size: 18px;
+    transition: top 0.3s ease, right 0.3s ease, font-size 0.3s ease;
+  }
+
+  .reason-title {
+    color: white;
+    margin-right: 30%;
+    transition: color 0.3s ease, margin-right 0.3s ease;
+  }
+
+  .admin-employee-details {
+    font-size: 14px;
+    transition: font-size 0.3s ease;
+  }
+
+  .admin-form-group {
+    margin-left: 0;
+    color: white;
+    transition: margin-left 0.3s ease, color 0.3s ease;
+  }
+}
