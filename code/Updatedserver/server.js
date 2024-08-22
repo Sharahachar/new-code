@@ -3,73 +3,35 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const crypto = require('crypto');
-
 const app = express();
 const port = 5000;
 
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 
+// Email configuration
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'sharathnvmca@gmail.com',
-        pass: 'pgkz nhat tswr gwnp'
-    }
+  service: 'gmail',
+  auth: {
+    user: 'sharathnvmca@gmail.com',
+    pass: 'pgkz nhat tswr gwnp' // Replace with your email password or app-specific password
+  }
 });
 
+// Resignation management
 let resignationRequests = {}; // Use a database in a real application
 
-// Route to send interview emails
-app.post('/send-email', async (req, res) => {
-    const { to, subject, applicant, date, time, link } = req.body;
+app.post('/send-resignation', (req, res) => {
+  const { name, id, domain, reason, managerEmail } = req.body;
 
-    const mailContent = `
-Dear ${applicant},
+  const approvalToken = crypto.randomBytes(16).toString('hex');
+  resignationRequests[approvalToken] = { name, id, domain, reason, status: 'pending', token: approvalToken };
 
-Your interview is scheduled for ${date} at ${time}.
-
-Please join the meeting using the following link: ${link}
-
-About Sylicon Software Pvt Ltd:
-Sylicon Software Pvt Ltd is a leading provider of cutting-edge technology solutions that empower businesses to reach their full potential. We are committed to innovation, quality, and customer satisfaction.
-
-Thank you, and we look forward to your interview.
-
-Best regards,
-HR, Sylicon Software Pvt Ltd
-BTM Layout, Kuvepu Nagara,
-Prabhavathi Bhaiva
-    `;
-
-    const mailOptions = {
-        from: 'sharathnvmca@gmail.com',
-        to: to,
-        subject: subject,
-        text: mailContent
-    };
-
-    try {
-        await transporter.sendMail(mailOptions);
-        res.status(200).send('Email sent successfully');
-    } catch (error) {
-        console.error('Error sending email:', error);
-        res.status(500).send('Failed to send email');
-    }
-});
-
-// Route to handle resignation
-app.post('/send-resignation', async (req, res) => {
-    const { name, id, domain, reason, managerEmail } = req.body;
-
-    const approvalToken = crypto.randomBytes(16).toString('hex');
-    resignationRequests[approvalToken] = { name, id, domain, reason, status: 'pending', token: approvalToken };
-
-    const mailOptions = {
-        from: 'sharathnvmca@gmail.com',
-        to: managerEmail,
-        subject: 'Resignation Submission',
-        html: `
+  const mailOptions = {
+    from: 'sharathnvmca@gmail.com',
+    to: managerEmail,
+    subject: 'Resignation Submission',
+    html: `
       <p>Employee ${name}</p>
       <p>(ID: ${id})</p>
       <p>Reason: ${reason}</p>
@@ -79,54 +41,24 @@ app.post('/send-resignation', async (req, res) => {
         <a href="http://localhost:5000/cancel-resignation?token=${approvalToken}" style="color:red; font-size:20px; margin-left: 30%;">✘ Cancel</a>
       </p>
     `
-    };
+  };
 
-    try {
-        await transporter.sendMail(mailOptions);
-        res.status(200).send('Email sent successfully.');
-    } catch (error) {
-        console.error('Error sending email:', error);
-        res.status(500).send('Failed to send email.');
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      res.status(500).send('Failed to send email.');
+    } else {
+      console.log('Email sent:', info.response);
+      res.status(200).send('Email sent successfully.');
     }
+  });
 });
 
-// Route to handle discussion notifications
-app.post('/send-discussion-notification', async (req, res) => {
-    const { name, id, managerEmail } = req.body;
-
-    const mailOptions = {
-        from: 'sharathnvmca@gmail.com',
-        to: managerEmail,
-        subject: 'Discussion Notification',
-        html: `
-      <p>Employee ${name}</p>
-      <p>(ID: ${id})</p>
-      <p>has requested to discuss their resignation.</p>
-    `
-    };
-
-    try {
-        await transporter.sendMail(mailOptions);
-        res.status(200).send('Notification sent successfully.');
-    } catch (error) {
-        console.error('Error sending notification:', error);
-        res.status(500).send('Failed to send notification.');
-    }
-});
-
-// Route to check resignation status
-app.get('/check-status', (req, res) => {
-    const { id } = req.query;
-    const status = Object.values(resignationRequests).find(req => req.id === id)?.status || 'pending';
-    res.json({ status });
-});
-
-// Route to approve resignation
 app.get('/approve-resignation', (req, res) => {
-    const { token } = req.query;
-    if (resignationRequests[token]) {
-        resignationRequests[token].status = 'resignation_approved';
-        res.send(`
+  const { token } = req.query;
+  if (resignationRequests[token]) {
+    resignationRequests[token].status = 'resignation_approved';
+    res.send(`
       <!DOCTYPE html>
       <html>
       <head>
@@ -141,8 +73,8 @@ app.get('/approve-resignation', (req, res) => {
       </body>
       </html>
     `);
-    } else {
-        res.send(`
+  } else {
+    res.send(`
       <!DOCTYPE html>
       <html>
       <head>
@@ -157,15 +89,14 @@ app.get('/approve-resignation', (req, res) => {
       </body>
       </html>
     `);
-    }
+  }
 });
 
-// Route to cancel resignation
 app.get('/cancel-resignation', (req, res) => {
-    const { token } = req.query;
-    if (resignationRequests[token]) {
-        resignationRequests[token].status = 'cancelled';
-        res.send(`
+  const { token } = req.query;
+  if (resignationRequests[token]) {
+    resignationRequests[token].status = 'cancelled';
+    res.send(`
       <!DOCTYPE html>
       <html>
       <head>
@@ -180,8 +111,8 @@ app.get('/cancel-resignation', (req, res) => {
       </body>
       </html>
     `);
-    } else {
-        res.send(`
+  } else {
+    res.send(`
       <!DOCTYPE html>
       <html>
       <head>
@@ -196,29 +127,99 @@ app.get('/cancel-resignation', (req, res) => {
       </body>
       </html>
     `);
-    }
+  }
 });
 
-// Route to send multiple emails
-app.post('/send-bulk-emails', async (req, res) => {
-    const { recipients, subject, body } = req.body;
+app.post('/send-discussion-notification', (req, res) => {
+  const { name, id, managerEmail } = req.body;
 
-    const mailOptions = {
-        from: 'sharathnvmca@gmail.com',
-        to: recipients.join(','),
-        subject: subject,
-        html: body,
-    };
+  const mailOptions = {
+    from: 'sharathnvmca@gmail.com',
+    to: managerEmail,
+    subject: 'Discussion Notification',
+    html: `
+      <p>Employee ${name}</p>
+      <p>(ID: ${id})</p>
+      <p>has requested to discuss their resignation.</p>
+    `
+  };
 
-    try {
-        await transporter.sendMail(mailOptions);
-        res.json({ message: 'Emails sent successfully' });
-    } catch (error) {
-        console.error('Error sending emails:', error);
-        res.status(500).json({ error: 'Failed to send emails' });
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending notification:', error);
+      res.status(500).send('Failed to send notification.');
+    } else {
+      console.log('Notification sent:', info.response);
+      res.status(200).send('Notification sent successfully.');
     }
+  });
+});
+
+app.get('/check-status', (req, res) => {
+  const { id } = req.query;
+  const status = Object.values(resignationRequests).find(req => req.id === id)?.status || 'pending';
+  res.json({ status });
+});
+
+// General email sending
+app.post('/send-email', (req, res) => {
+  const { recipients, subject, body } = req.body;
+
+  const mailOptions = {
+    from: 'sharathnvmca@gmail.com',
+    to: recipients,
+    subject: subject,
+    html: body,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).send('Error sending email');
+    }
+    console.log('Email sent:', info.response);
+    res.status(200).json({ message: 'Email sent successfully' });
+  });
+});
+
+// Interview notification
+app.post('/send-interview-notification', (req, res) => {
+  const { to, subject, applicant, date, time, link } = req.body;
+
+  const mailContent = `
+    Dear ${applicant},
+
+    Your interview is scheduled for ${date} at ${time}.
+
+    Please join the meeting using the following link: ${link}
+
+    About Syliqon Software Pvt Ltd:
+    Sylicon Software Pvt Ltd is a leading provider of cutting-edge technology solutions that empower businesses to reach their full potential. We are committed to innovation, quality, and customer satisfaction.
+
+    Thank you, and we look forward to your interview.
+
+    Best regards,
+    HR, Syliqon Software Pvt Ltd
+    BTM Layout, Kuvepu Nagara,
+    Prabhavathi Bhaiva
+  `;
+
+  const mailOptions = {
+    from: 'sharathnvmca@gmail.com',
+    to: to,
+    subject: subject,
+    text: mailContent
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).send('Failed to send email');
+    }
+    res.status(200).send('Email sent successfully');
+  });
 });
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
