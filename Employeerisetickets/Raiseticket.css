@@ -1,0 +1,135 @@
+.raise-ticket-container {
+    padding: 20px;
+    background: transparent;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(17, 17, 17, 0.863);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    width: 60%;
+    margin-right: 1200px;
+    height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.raise-ticket-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(#47229e);
+    z-index: -1;
+}
+
+.raise-ticket-container h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.raise-ticket-form-container {
+    margin-top: 20px;
+}
+
+.raise-ticket-form-group {
+    margin-bottom: 15px;
+}
+
+.raise-ticket-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: rgb(236, 232, 232); /* White text color for labels */
+}
+
+.raise-ticket-form-group input,
+.raise-ticket-form-group select,
+.raise-ticket-form-group textarea,
+.raise-ticket-form-group input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.raise-ticket-form-group textarea {
+    height: 100px;
+}
+
+.raise-ticket-form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 95%;
+}
+
+.raise-ticket-half-width {
+    flex: 1;
+}
+
+.raise-ticket-button-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.raise-ticket-submit-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    width: 20%;
+}
+
+.raise-ticket-submit-button:hover {
+    background-color: #0056b3;
+}
+
+.raise-ticket-cancel-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    width: 20%;
+}
+
+.raise-ticket-cancel-button:hover {
+    background-color: #a71d2a;
+}
+
+.raise-ticket-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+/* Raiseticket.css */
+
+.notification-bar {
+    width: 60%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #4CAF50; /* Green color for success */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 1000; /* Make sure it's above other content */
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
